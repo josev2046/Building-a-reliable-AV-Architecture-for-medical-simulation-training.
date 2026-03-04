@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18864522.svg)](https://doi.org/10.5281/zenodo.18864522)
 
 
-Back in 2015, my colleague, friend and mentor Dean Offord completed a case study with Panasonic and Panopto in the UK. It covered the deployment of video hardware across university campuses. The hardware has naturally updated since then, but the core principles of a good AV setup remain exactly the same today. Whether you are capturing standard lectures, recording graduation ceremonies, or building out a complex healthcare simulation suite, the foundation does not change.
+Back in 2015, my colleague, friend and mentor Dean Offord completed a seminal case study with Panasonic and Panopto in the UK. It covered the deployment of video hardware across university campuses. The hardware has naturally updated since then, but the core principles of a good AV setup remain exactly the same today. Whether you are capturing standard lectures, recording graduation ceremonies, or building out a complex healthcare simulation suite, the foundation does not change.
 
 Inspired by that project, I have mapped out a universal architecture that handles these demands predictably and reliably in Panopto today. It works by breaking the system down into five distinct layers. Thus:
 
