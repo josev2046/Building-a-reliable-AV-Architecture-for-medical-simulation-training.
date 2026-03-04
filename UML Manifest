@@ -1,0 +1,67 @@
+@startuml
+
+'--- Technical Configuration ---
+skinparam linetype ortho
+skinparam shadowing false
+skinparam nodesep 60
+skinparam ranksep 40
+skinparam componentStyle rectangle
+
+
+'--- Layout Nodes ---
+
+package "1. Source Layer (Simulation Rooms)" #f9f9f9 {
+    [Cameras (PTZ & Fixed)] as Cam
+    [Microphones (Room & Lapel)] as Mics
+    [Patient Monitors (HDMI)] as HDMI
+}
+
+package "2. Ingestion & Control (On-Site)" #e1f5fe {
+    component "Audio DSP / Mixer" as DSP #LightSteelBlue
+    component "Hardware Encoder\n(Pearl / PC RR)" as Encoder #SkyBlue
+    component "PTZ Controller" as PTZ_Joy #LightGray
+}
+
+package "3. Immediate Review (Low Latency)" #fff9c4 {
+    [Local Monitor / Decoder] as LocalView
+    [Local Storage / SSD] as LocalRec
+}
+
+package "4. Content Management (Cloud)" #e8f5e9 {
+    [Panopto Remote Recorder] as PRR
+    database "Cloud Storage / VOD" as Cloud
+}
+
+package "5. Distribution (End Users)" #f3e5f5 {
+    [Classroom Display] as Class
+    [Remote Students] as Students
+    [Assessment / Faculty] as Staff
+}
+
+'--- Orthogonal Connections (Top-Down Flow) ---
+
+'Control Loop
+PTZ_Joy -up-> Cam : RS232/IP Control
+
+'Audio Processing
+Mics -down-> DSP
+DSP -down-> Encoder : Mixed Feed
+
+'Video Processing
+Cam -down-> Encoder : SDI/NDI/USB
+HDMI -down-> Encoder : HDMI In
+
+'Local Monitoring (Side Flow)
+Encoder -right-> LocalView
+LocalView -down-> LocalRec : Immediate Playback
+
+'Cloud Ingestion
+Encoder -down-> PRR
+PRR -down-> Cloud : Processing
+
+'Final Delivery
+Cloud -down-> Class
+Cloud -down-> Students
+Cloud -down-> Staff
+
+@enduml
